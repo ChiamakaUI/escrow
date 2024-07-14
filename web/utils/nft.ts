@@ -11,7 +11,7 @@ export const getNFTMetadata = async (mintAddressString) => {
   }
 
   // Using a different public RPC endpoint
-  const connection = new Connection('https://mainnet.helius-rpc.com/?api-key=460424af-54bf-4327-a17e-84620d95352b');
+  
   const metaplex = new Metaplex(connection);
 
   let mintAddress;
