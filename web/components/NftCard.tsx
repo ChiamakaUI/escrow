@@ -6,7 +6,7 @@ type NftCardProps = {
 const NftCard = ({ nft, setSelected }: NftCardProps) => {
   return (
     <div
-      className="border border-gray-600 p-4 cursor-pointer"
+      className="border border-gray-600 p-4 cursor-pointer w-[300px]"
       onClick={() => setSelected(nft)}
     >
       <img

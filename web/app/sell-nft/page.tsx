@@ -76,8 +76,8 @@ export default function Page() {
       {loading ? (
         <div>Loading...</div>
       ) : metadataList.length !== 0 ? (
-        <div className="p-4">
-          <h2 className="text-2xl font-bold mb-4">SELECT YOUR NFT FOR SWAP</h2>
+        <div className="p-4 w-[85%] mx-auto">
+          <h2 className="text-2xl my-2 text-center ">Select Nft to proceed </h2>
           <div className="grid grid-cols-3 gap-4">
             {metadataList.map((nft, i) => (
               <NftCard key={i} nft={nft} setSelected={handleNFTSelect} />
@@ -87,7 +87,7 @@ export default function Page() {
             <p className="mb-1">Price (SOL)</p>
             <input
               type="text"
-              className="border border-white p-2 rounded-xl w-[55%] text-white"
+              className="border border-white p-2 rounded-xl w-full lg:w-[35%] text-white"
               onChange={(e) => setNftPrice(e.target.value)}
               value={nftPrice}
             />
