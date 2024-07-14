@@ -5,7 +5,7 @@ import {
   createPostResponse,
   ActionPostResponse,
   ActionPostRequest,
-} from "@solana/actions";
+} from '@solana/actions';
 
 import {
   Transaction,
@@ -14,17 +14,30 @@ import {
   ComputeBudgetProgram,
   Connection,
   clusterApiUrl,
-} from "@solana/web3.js";
-
+} from '@solana/web3.js';
+import { program } from '@/config/program';
 
 export const GET = (req: Request) => {
+  const url = new URL(req.url);
+  const icon = url.searchParams.get('icon');
+  const description = url.searchParams.get('description');
+  const title = url.searchParams.get('title');
+  const price = url.searchParams.get('price');
+
+  if (!icon || !description || !title || !price) {
+    return new Response(JSON.stringify({ error: 'Missing required parameters' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json', ...ACTIONS_CORS_HEADERS },
+    });
+  }
+
   const payload: ActionGetResponse = {
-    icon: "https://res.cloudinary.com/adaeze/image/upload/v1712587387/iekfebkgowfor9dqp8la.jpg",
-    description:
-      "Nike Air cushioning is a lightweight, durable and industry-leading innovation that absorbs impact and shifts energy back into performance, all in flawless comfort.",
-    title: "Nike Air",
-    label: "Buy Now",
+    icon,
+    description,
+    title,
+    label: `${price} usd`,
   };
+
   return Response.json(payload, {
     headers: ACTIONS_CORS_HEADERS,
   });
@@ -47,13 +60,13 @@ export const POST = async (req: Request) => {
 
       new TransactionInstruction({
         programId: new PublicKey(MEMO_PROGRAM_ID),
-        data: Buffer.from("this is a simple message", "utf8"),
+        data: Buffer.from('this is a simple message', 'utf8'),
         keys: [],
       })
     );
     transaction.feePayer = account;
 
-    const connection = new Connection(clusterApiUrl("devnet"));
+    const connection = new Connection(clusterApiUrl('devnet'));
     transaction.recentBlockhash = (
       await connection.getLatestBlockhash()
     ).blockhash;
@@ -63,11 +76,10 @@ export const POST = async (req: Request) => {
       },
     });
 
-    console.log(payload);
     return Response.json(payload, {
       headers: ACTIONS_CORS_HEADERS,
     });
   } catch (error) {
-    return Response.json("An unknown error occured", { status: 400 });
+    return Response.json('An unknown error occured', { status: 400 });
   }
 };

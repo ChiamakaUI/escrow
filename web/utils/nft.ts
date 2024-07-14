@@ -2,8 +2,8 @@
 import { Metaplex } from '@metaplex-foundation/js';
 import { Connection, PublicKey } from '@solana/web3.js';
 
-export const getNFTMetadata = async (mintAddressString) => {
-    console.log({mintAddressString})
+export const getNFTMetadata = async (mintAddressString: PublicKey) => {
+    // console.log({mintAddressString})
   // Check if mintAddressString is defined
   if (!mintAddressString) {
     console.error('Error: mintAddressString is undefined');
@@ -11,7 +11,7 @@ export const getNFTMetadata = async (mintAddressString) => {
   }
 
   // Using a different public RPC endpoint
-  
+  const connection = new Connection('https://mainnet.helius-rpc.com/?api-key=460424af-54bf-4327-a17e-84620d95352b');
   const metaplex = new Metaplex(connection);
 
   let mintAddress;
