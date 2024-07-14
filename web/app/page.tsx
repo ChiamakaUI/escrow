@@ -1,5 +1,9 @@
-import DashboardFeature from '@/components/dashboard/dashboard-feature';
+import { WalletButton } from "@/context"
 
 export default function Page() {
-  return <DashboardFeature />;
+  return (
+    <div className="text-red-600 text-xl">Home
+    <WalletButton/>
+    </div>
+  )
 }
