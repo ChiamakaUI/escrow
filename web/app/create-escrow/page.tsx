@@ -1,11 +1,10 @@
-import { Transaction } from "@/components"
+import { Transaction } from '@/components';
 const Page = () => {
-  
   return (
     <div>
-<Transaction/>
+      <Transaction />
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

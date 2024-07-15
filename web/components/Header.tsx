@@ -7,8 +7,8 @@ const Header = () => {
   return (
     <header className="flex justify-between items-center p-4">
       <nav>
-        <Link href="/" className="text-white">
-          Home
+        <Link href="/" className="text-white font-bold">
+          Escrow
         </Link>
       </nav>
       <WalletMultiButton />

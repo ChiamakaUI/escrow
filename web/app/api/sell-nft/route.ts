@@ -15,7 +15,6 @@ import {
   Connection,
   clusterApiUrl,
 } from '@solana/web3.js';
-import { program } from '@/config/program';
 
 export const GET = (req: Request) => {
   const url = new URL(req.url);
@@ -35,7 +34,7 @@ export const GET = (req: Request) => {
     icon,
     description,
     title,
-    label: `${price} usd`,
+    label: `${price} sol`,
   };
 
   return Response.json(payload, {

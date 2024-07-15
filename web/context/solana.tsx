@@ -1,14 +1,18 @@
 "use client"
+import { ReactNode, useCallback, useMemo } from 'react';
 import { WalletError } from '@solana/wallet-adapter-base';
 import {
   ConnectionProvider,
   WalletProvider,
+  AnchorWallet,
+  useConnection,
+  useWallet,
 } from '@solana/wallet-adapter-react';
 import {
   WalletModalProvider,
   WalletMultiButton,
 } from '@solana/wallet-adapter-react-ui';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { AnchorProvider } from '@coral-xyz/anchor';
 import { useCluster } from './cluster';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -29,4 +33,13 @@ export function SolanaProvider({ children }: { children: ReactNode }) {
       </WalletProvider>
     </ConnectionProvider>
   );
+}
+
+export function useAnchorProvider() {
+  const { connection } = useConnection();
+  const wallet = useWallet();
+
+  return new AnchorProvider(connection, wallet as AnchorWallet, {
+    commitment: 'confirmed',
+  });
 }

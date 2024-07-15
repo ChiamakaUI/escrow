@@ -1,1 +1,1 @@
-export * from "./useAnchorProvider"
+export { useEscrowProgram } from "./useEscrowProgram"

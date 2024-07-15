@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useWallet, useAnchorWallet } from '@solana/wallet-adapter-react';
+import { PublicKey } from '@solana/web3.js';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { getNFTMetadata } from '@/utils';
 import { NftCard } from '@/components';
 import { NftMeta } from '@/types';
@@ -17,9 +18,11 @@ export default function Page() {
   const getNftsAndMetadata = async () => {
     setLoading(true);
     try {
-      const nftResults = await getNFTMetadata(
-        wallet?.publicKey?.toString() || ''
-      );
+      if (!wallet.publicKey) {
+        console.log('wallet public key not available');
+        return;
+      }
+      const nftResults = await getNFTMetadata(new PublicKey(wallet.publicKey));
       setNfts(nftResults);
       if (!nftResults) return;
 
@@ -58,7 +61,7 @@ export default function Page() {
 
     const desc = selectedNFT?.description ?? '';
 
-    const apiUrl = new URL('/api/swap-nft', window.location.origin);
+    const apiUrl = new URL('/api/sell-nft', window.location.origin);
     apiUrl.searchParams.set('icon', selectedNFT?.image);
     apiUrl.searchParams.set('description', desc);
     apiUrl.searchParams.set('title', selectedNFT?.name);
@@ -67,14 +70,15 @@ export default function Page() {
     const dialToUrl = new URL('https://dial.to/');
     dialToUrl.searchParams.set('action', `solana-action:${apiUrl.toString()}`);
 
-    console.log('Redirecting to:', dialToUrl.toString());
     window.location.href = dialToUrl.toString();
   };
 
   return (
     <div className="min-h-screen bg-black text-white">
       {loading ? (
-        <div>Loading...</div>
+        <div className="pt-5 text-center"> 
+        <p>Loading...</p>
+        </div>
       ) : metadataList.length !== 0 ? (
         <div className="p-4 w-[85%] mx-auto">
           <h2 className="text-2xl my-2 text-center ">Select Nft to proceed </h2>
@@ -101,10 +105,10 @@ export default function Page() {
           </button>
         </div>
       ) : (
-        <div>No NFTs found</div>
+        <div className="pt-5 text-center">
+          <p>No NFTs found</p>
+        </div>
       )}
     </div>
   );
 }
-
-
