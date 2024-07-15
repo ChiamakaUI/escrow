@@ -1,6 +1,10 @@
-# escrow
+# Escrow UI + Blink
 
 This project is generated with the [create-solana-dapp](https://github.com/solana-developers/create-solana-dapp) generator.
+
+## Project Overview
+
+This project leverages the Anchor Escrow smart contract, Solana actions, and Helius RPCs to interact with the Solana blockchain. It provides a user-friendly interface to initiate escrow transactions and sell NFTs.
 
 ## Getting Started
 
@@ -11,6 +15,14 @@ This project is generated with the [create-solana-dapp](https://github.com/solan
 - Rust v1.77.2 or higher
 - Anchor CLI 0.30.0 or higher
 - Solana CLI 1.18.9 or higher
+
+## Environment Variables
+Create a .env file in the root of the web folder and add the following environment variables:
+
+````
+NEXT_PUBLIC_HELIUS_API_KEY=your-helius-api-key
+NEXT_PUBLIC_HELIUS_RPC_URL=your-helius-rpc-url
+```
 
 ### Installation
 
