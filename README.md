@@ -22,7 +22,7 @@ Create a .env file in the root of the web folder and add the following environme
 ````
 NEXT_PUBLIC_HELIUS_API_KEY=your-helius-api-key
 NEXT_PUBLIC_HELIUS_RPC_URL=your-helius-rpc-url
-```
+
 
 ### Installation
 
